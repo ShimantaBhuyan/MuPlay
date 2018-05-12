@@ -1,0 +1,27 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #1d1d21;
+    overflow: hidden;
+}
+div{
+    width: 100%;
+    height: 100%;
+    background-image: url('images/charliePuthBoy.png');
+    background-position: center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+@media screen and (max-device-width:700px){
+    div{
+        background-size : contain;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+    }
+}
