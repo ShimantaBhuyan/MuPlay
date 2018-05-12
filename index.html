@@ -1,0 +1,72 @@
+<html>
+   
+    <head>       
+        <title>MuPlay</title>        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <style>
+            body{
+                background: url('images/charliePuthBoy.png') no-repeat cover fixed center;
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center;
+            }
+        </style>
+    </head>
+    
+    <body>       
+        <audio controls src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>        
+        <script>            
+            //array containing the names of the songs/pictures
+            var names = ["Boy", "EmptyCups", "LaGirls", "Patient", "SlowItDown", "SomebodyToldMe", "ThroughItAll"];
+            //index variable to run through the songs
+            var index = 0;     
+            //initialize variable bgimg(background image), style(body style css) and songName(name of the song),  to empty string
+            var bgimg = "", songName = "";  
+            //get the audio element
+            var Audio = $('audio')[0];
+            console.log(Audio);
+            //set volume to 50%
+            Audio.volume = 0.1;
+            //play the first song
+            playSong();
+            //when the song ends, update bgimg, style, songName and load again by calling loadNew function
+            Audio.onended = function () {
+                loadNew();
+            };  
+            function playSong() {
+                console.log("Inside playSong()");
+                //set background image variable
+                bgimg = "images/charliePuth"+names[index]+".png";
+                console.log(bgimg);
+                //set songName variable from the names array
+                songName = "audio/charliePuth"+names[index]+".mp3";
+                console.log(songName);
+                //set the background image getting the name from names array
+                $('body').css("background", 'url(\"'+bgimg+'\") no-repeat'); 
+                $('body').css("background-size",  "cover"); 
+                $('body').css("background-attachment", "fixed");
+                $('body').css("background-position", "center");
+                //set the audio source with name from names array
+                Audio.src = songName;
+                //load the song
+                Audio.load();
+                //play the song
+                Audio.autoplay = true;
+            }   
+            function loadNew() {            
+                //increment index variable
+                index++;  
+                //if index is less than size of the names array i.e. the current song has completed playing
+                if(index < names.length){
+                    playSong();
+                }
+                else{
+                    alert("Playlist Over!!!");
+                }
+            }
+        </script>        
+    </body>
+</html>
