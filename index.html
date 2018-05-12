@@ -6,10 +6,16 @@
         <script src="js/jquery-3.3.1.min.js"></script>
         <style>
             body{
+                background-color: #1d1d21;
                 background: url('images/charliePuthBoy.png') no-repeat cover fixed center;
                 background-size: cover;
                 background-attachment: fixed;
                 background-position: center;
+            }
+            @media screen and (max-width:700px){
+               body{
+                  background-size: cover;
+               }
             }
         </style>
     </head>
@@ -45,10 +51,8 @@
                 songName = "audio/charliePuth"+names[index]+".mp3";
                 console.log(songName);
                 //set the background image getting the name from names array
+                //other values actually override the stle.css styles
                 $('body').css("background", 'url(\"'+bgimg+'\") no-repeat'); 
-                $('body').css("background-size",  "cover"); 
-                $('body').css("background-attachment", "fixed");
-                $('body').css("background-position", "center");
                 //set the audio source with name from names array
                 Audio.src = songName;
                 //load the song
@@ -57,7 +61,8 @@
                 //Audio.autoplay = true;
                 Audio.play();
                 //Google chrome has issues with above play method, so this
-                Audio.addEventListener('canplay', function() { this.play(); } );
+                //Need to change Google Chromes autplay policy method
+                //Audio.addEventListener('canplay', function() { this.play(); } );
             }   
             function loadNew() {            
                 //increment index variable
