@@ -56,6 +56,8 @@
                 //play the song
                 //Audio.autoplay = true;
                 Audio.play();
+                //Google chrome has issues with above play method, so this
+                Audio.addEventListener('canplay', function() { this.play(); } );
             }   
             function loadNew() {            
                 //increment index variable
