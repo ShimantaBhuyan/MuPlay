@@ -1,30 +1,20 @@
 <html>
    
     <head>       
-        <title>MuPlay</title>        
+        <title>MuPlay</title>
+        <meta charset="utf-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="js/jquery-3.3.1.min.js"></script>
-        <style>
-            body{
-                background-color: #1d1d21;
-                background: url('images/charliePuthBoy.png') no-repeat cover fixed center;
-                background-size: cover;
-                background-attachment: fixed;
-                background-position: center;
-            }
-            @media screen and (max-width:700px){
-               body{
-                  background-size: cover;
-               }
-            }
-        </style>
+        <link  rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     
-    <body>       
-        <audio controls src="" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>        
-        <script>            
+    <body>  
+        <div>    
+            <audio controls src="" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>    
+        </div>     
+        <script>              
             //array containing the names of the songs/pictures
             var names = ["Boy", "EmptyCups", "LaGirls", "Patient", "SlowItDown", "SomebodyToldMe", "ThroughItAll"];
             //index variable to run through the songs
@@ -35,40 +25,43 @@
             var Audio = $('audio')[0];
             console.log(Audio);
             //set volume to 50%
-            Audio.volume = 0.1;
+            Audio.volume = 0.2;
+            //load the background image
+            loadBack();       
             //play the first song
             playSong();
             //when the song ends, update bgimg, style, songName and load again by calling loadNew function
             Audio.onended = function () {
                 loadNew();
-            };  
-            function playSong() {
-                console.log("Inside playSong()");
+            }; 
+            function loadBack(){                
                 //set background image variable
                 bgimg = "images/charliePuth"+names[index]+".png";
                 console.log(bgimg);
+                //set the background image getting the name from names array
+                $('div').css("background-image", 'url(\"'+bgimg+'\")'); 
+            }
+            function playSong() {
+                console.log("Inside playSong()");
                 //set songName variable from the names array
                 songName = "audio/charliePuth"+names[index]+".mp3";
                 console.log(songName);
-                //set the background image getting the name from names array
-                //other values actually override the stle.css styles
-                $('body').css("background", 'url(\"'+bgimg+'\") no-repeat'); 
                 //set the audio source with name from names array
+                Audio.src = "";
                 Audio.src = songName;
                 //load the song
                 Audio.load();
                 //play the song
                 //Audio.autoplay = true;
-                Audio.play();
-                //Google chrome has issues with above play method, so this
-                //Need to change Google Chromes autplay policy method
-                //Audio.addEventListener('canplay', function() { this.play(); } );
+                //Audio.play();
+                Audio.addEventListener('canplay', function() { this.play(); } );
             }   
             function loadNew() {            
                 //increment index variable
                 index++;  
                 //if index is less than size of the names array i.e. the current song has completed playing
                 if(index < names.length){
+                    loadBack();
                     playSong();
                 }
                 else{
