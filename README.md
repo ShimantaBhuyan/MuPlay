@@ -1,5 +1,5 @@
 # MuPlay
-A simple web audio player with custom background images
+A simple web audio player
 
 <h4>This is a simple audio player that is made with HTML5 and JQuery.</h4>
 
