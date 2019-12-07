@@ -13,17 +13,17 @@
             <audio controls src="" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-            // music next and prev song
-            <div class="music-control">
-                <div class="music-control__backward" id="backward">
-                    <img src="https://snowleo208.github.io/100-Days-of-Code/7.%20Music%20Player/img/backward.svg" alt="Backward">
-                </div>
-                <div class="music-control__forward" id="forward">
-                    <img src="https://snowleo208.github.io/100-Days-of-Code/7.%20Music%20Player/img/forward.svg" alt="Forward">
-                </div>
-            </div>     
+            <button class="arrow left" id="prev">
+                <img src="images/prev.svg" alt="Prev Music">
+            </button>
+            <button class="arrow right" id="next">
+                <img src="images/next.svg" alt="Next Music">
+            </button>     
         </div> 
-        <script>              
+        <script>
+            // buttons (next and previous)
+            var prevBtn = document.getElementById("prev");
+            var nextBtn = document.getElementById("next");             
             //array containing the names of the songs/pictures
             var names = ["Boy", "EmptyCups", "LaGirls", "Patient", "SlowItDown", "SomebodyToldMe", "ThroughItAll"];
             //index variable to run through the songs
@@ -39,9 +39,18 @@
             loadBack();       
             //play the first song
             playSong();
+            //for previous song
+            prevBtn.addEventListener("click", function (e) {
+                loadPrev()
+            });
+            //for next song
+            nextBtn.addEventListener("click", function (e) {
+                loadNext()
+            });
             //when the song ends, update bgimg, style, songName and load again by calling loadNew function
+            //nextBtn.addEventListener("click", function (e) {return nextMusic("next");});
             Audio.onended = function () {
-                loadNew();
+                loadNext();
             }; 
             function loadBack(){                
                 //set background image variable
@@ -64,7 +73,8 @@
                 //Audio.autoplay = true;
                 //Audio.play();
                 Audio.addEventListener('canplay', function() { this.play(); } );
-            }   
+            } 
+            /* Previous loading function
             function loadNew() {            
                 //increment index variable
                 index++;  
@@ -77,6 +87,33 @@
                     alert("Playlist Over!!!");
                 }
             }
+            */
+            function loadNext() {            
+                //increment index variable
+                index++;  
+                //if index is less than size of the names array i.e. the current song has completed playing
+                if(index < names.length){
+                    loadBack();
+                    playSong();
+                }
+                else{
+                    alert("Playlist Over!!!");
+                }
+            }
+
+            function loadPrev() {            
+                //decrement index variable
+                index--;  
+                //Cannot have previous of first song
+                if(index > -1){
+                    loadBack();
+                    playSong();
+                }
+                else{
+                    alert("Well that was the first song, Nothing before that!");
+                }
+            }
+            
         </script>    
     </body>
 </html>

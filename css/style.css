@@ -26,16 +26,3 @@ div{
     }
 }
 
-.music-control {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    height: 2em;
-  }
-
-.music-control__backward, .music-control__forward {
-    width: 1.5em;
-    height: 1.5em;
-  }
-
