@@ -19,6 +19,7 @@ div{
 }
 @media screen and (max-device-width:700px){
     div{
+        text-align: center;
         background-size : contain;
         -webkit-background-size: contain;
         -moz-background-size: contain;
